@@ -69,6 +69,12 @@ class SASConnector{
         }
     }
 
+    public function decpayload($payload)
+    {
+        $data = $this->aes::decrypt($payload, 'abcdefghijuklmno0123456789012345');
+        return $data;
+    }
+
 }
 
 

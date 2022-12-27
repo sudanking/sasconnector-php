@@ -2,7 +2,7 @@
 
 require_once 'SASConnector.php';
 
-$sitenumber = 59;
+$sitenumber = 60;
 
 $api = new SASConnector('cloud.intouch-sd.com', 'admin', 'Genie999@');
 $api->login();
@@ -91,4 +91,3 @@ $res = $api->post('manager', [
     "limit_mac_change_count" => "0"
 ]);
 print_r(json_decode($res));
-
