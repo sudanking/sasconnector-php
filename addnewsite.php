@@ -2,13 +2,18 @@
 
 require_once 'SASConnector.php';
 
-$sitenumber = 60;
+// using $argc and $argv 
+// more info: https://www.igorkromin.net/index.php/2017/12/07/how-to-pass-parameters-to-your-php-script-via-the-command-line/
+
+if ( $argc <= 1 ) {
+    exit("No site number to create...");
+}
+
+
+$sitenumber = $argv[1];
 
 $api = new SASConnector('cloud.intouch-sd.com', 'admin', 'Genie999@');
 $api->login();
-// $res = $api->post('index/manager', 'U2FsdGVkX19/352bPxa5ionTsULecMZBjqrA9gLMca3o3SPf6qQCIqEGdocFDnesPq5nH77l6iLyg/B6jHy+MUJANO2oWy367CjSFmh/GFxHmRlJAOHo11DYWMvrr/51sltZtvVsg0fmNzJUQDVCqnLFtBGhkwHQhtd6F9E9QkSkIOvPMr6M62FAtjfN2rB0Qg48OsN0Wti2efRDhY7498soqd4as3oSElOtcYWUlkFlwjqR+Nee2I+ojtOmZu3WIW4MGpOJzePQbSQPpVQugQ==');
-// print_r(json_decode($res));
-// echo $res;
 
 //Add NAS
 $res = $api->post('nas', [
@@ -31,6 +36,9 @@ $res = $api->post('nas', [
     "ssh_port" => "22"
 ]);
 print_r(json_decode($res));
+$output = json_decode($res);
+
+echo $status = ($output->status == 200) ?  "Create Main NAS server...\n" : "Error Creating Main NAS!! \n";  
 
 //Add Backup NAS
 $res = $api->post('nas', [
@@ -52,7 +60,9 @@ $res = $api->post('nas', [
     "ssh_password" => null,
     "ssh_port" => "22"
 ]);
-print_r(json_decode($res));
+// print_r(json_decode($res));
+$output = json_decode($res);
+echo $status = ($output->status == 200) ?  "Create Backup NAS server...\n" : "Error Creating Backup NAS!!\n"; 
 
 //Add Manager
 $res = $api->post('manager', [
@@ -90,4 +100,6 @@ $res = $api->post('manager', [
     "limit_mac_change" => 0,
     "limit_mac_change_count" => "0"
 ]);
-print_r(json_decode($res));
+// print_r(json_decode($res));
+$output = json_decode($res);
+echo $status = ($output->status == 200) ?  "Create New Manager...\n" : "Error can not create New Manager...\n"; 
