@@ -3,9 +3,9 @@
 require_once 'SASConnector.php';
 
 $qty = 1000;
-$siteOwner = 54;
-$profileID = 14;
-$expiration = "2024-12-30T00 =>00 =>00.000Z";
+$siteOwner = 5;
+$profileID = 6;
+$expiration = "2024-12-31 00:00:00";
 
 // $sitenumber = 59;
 
