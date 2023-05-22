@@ -2,9 +2,17 @@
 
 require_once 'SASConnector.php';
 
-$qty = 1000;
-$siteOwner = 5;
-$profileID = 6;
+
+if ( $argc <= 2 ) {
+    exit("No site number or profile ID..");
+}
+
+$profileID = $argv[1];
+$siteOwner = $argv[2];
+
+$qty = 2000;
+// $siteOwner = 45;
+// $profileID = 6;
 $expiration = "2024-12-31 00:00:00";
 
 // $sitenumber = 59;
